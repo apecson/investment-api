@@ -8,8 +8,6 @@ nginx:
 
 driver:
   build: .
-  volumes:
-    - .:/src
   ports:
     - "4000:80"
   links:
