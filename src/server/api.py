@@ -40,7 +40,11 @@ class TransactionType(Enum):
 
 class GetAllTransactions(Resource):
     def get(self):
-        return json.loads(redis.get('transactions'))
+        transactions = redis.get('transactions')
+        if transactions:
+            return json.loads(transactions)
+        else:
+            abort(404, message="There are no transactions at this time")
 
 class GetSingleTransaction(Resource):
     def get(self, transaction_id):

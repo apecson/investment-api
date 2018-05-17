@@ -1,9 +1,18 @@
 redis:
   image: redis
 
+nginx:
+  image: nginx
+  ports:
+    - "4001:90"
+
 driver:
   build: .
+  volumes:
+    - .:/src
   ports:
     - "4000:80"
   links:
     - redis
+    - nginx
+

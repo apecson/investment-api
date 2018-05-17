@@ -11,11 +11,17 @@ ADD . /src/server
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-# Make port 80 available to the world outside this container
-EXPOSE 80
+# Copy a configuration file from the current directory
+ADD nginx.conf /etc/nginx/
+
+# Copy static files
+ADD /src/client/build/ /usr/share/nginx/html/
+
+# Make port 80 and 90 available to the world outside this container
+EXPOSE 80 90
 
 # Define environment variable
 ENV NAME credit-api
 
 # Run app.py when the container launches
-CMD ["python", "src/server/api.py"]
+CMD ["python", "server/api.py"]
