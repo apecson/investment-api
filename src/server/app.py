@@ -3,12 +3,12 @@ from flask import Flask, request
 from flask_cors import CORS
 from flask_restful import fields, marshal_with, reqparse, abort, Api, Resource
 import json
+import uuid
 import os
 # from redis import Redis, RedisError
 import redis
-import socket
 import time
-import uuid
+import socket
 
 app = Flask(__name__)
 api = Api(app)
@@ -64,10 +64,6 @@ redis.set('transactions', json.dumps([
     }
 ]))
 
-class TransactionType(Enum):
-    PAY = 0
-    DRAW = 1
-
 class Lines(Resource):
     def __init__(self):
         self.args = parser.parse_args()
@@ -116,7 +112,6 @@ class Lines(Resource):
         redis.set('lines', json.dumps(lines))
         return 200
 
-
 class Transactions(Resource):
     def __init__(self):
         self.args = parser.parse_args()
@@ -150,7 +145,7 @@ class Transactions(Resource):
         line = self.get_line_by_id(line_id)
         current_principal = int(line['principal'])
 
-        if t_type == TransactionType.PAY:
+        if int(t_type) == 0:
             next_principal = int(current_principal) + int(amount)
         else:
             next_principal = int(current_principal) - int(amount)

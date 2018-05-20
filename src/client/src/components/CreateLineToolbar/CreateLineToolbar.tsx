@@ -6,30 +6,7 @@ interface ICreateLineProps {
     lineCreated: (line: any) => void;
 }
 
-const Button = styled.button`
-    border: solid 1px #000;
-    display: block;
-    margin-top: 5px;
-`;
-
-const Input = styled.input`
-	border: solid 1px #000;
-`;
-
-const Label = styled.label`
-    display: block;
-    font-weight: bold;
-`
-
-const Title = styled.h1`
-    margin-bottom: 5px;
-`;
-
-const Toolbar = styled.div`
-    margin: 5px 0;
-`;
-
-class CreateLineToolbar extends React.Component<ICreateLineProps, any> {
+export default class CreateLineToolbar extends React.Component<ICreateLineProps, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,8 +16,7 @@ class CreateLineToolbar extends React.Component<ICreateLineProps, any> {
             response: undefined
         }
     }
-
-    public saveLine = () => {
+    public createLine = () => {
         const { apr, name, principal } = this.state;
         axios.post(`http://localhost:5000/api/lines`, {
             apr,
@@ -71,17 +47,43 @@ class CreateLineToolbar extends React.Component<ICreateLineProps, any> {
         const { apr, name, principal } = this.state;
         return (
             <Toolbar>
-                <Title>Add line of credit:</Title>
+                <Title>Create line of credit:</Title>
                     <Label>name:</Label>
                     <Input onChange={this.updateName} value={name} />
                     <Label>principal:</Label>
                     <Input onChange={this.updatePrincipal} value={principal} />
                     <Label>apr:</Label>
                     <Input onChange={this.updateApr} value={apr} />
-                    <Button onClick={this.saveLine}>save</Button>
+                    <Button onClick={this.createLine}>create</Button>
             </Toolbar>
         );
     }
 }
 
-export default CreateLineToolbar;
+const Button = styled.button`
+    border: solid 1px #000;
+    display: block;
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px;
+    background: black;
+    color: white;
+`;
+
+const Input = styled.input`
+	border: solid 1px #000;
+`;
+
+const Label = styled.label`
+    display: block;
+    font-weight: bold;
+`
+
+const Title = styled.h1`
+    margin-bottom: 5px;
+`;
+
+const Toolbar = styled.div`
+    margin: 5px 0;
+`;

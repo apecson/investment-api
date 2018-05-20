@@ -7,35 +7,7 @@ interface ICreateTransactionToolbar {
     transactionCreated: (line: any) => void;
 }
 
-const Button = styled.button`
-    border: solid 1px #000;
-    display: block;
-    margin-top: 5px;
-`;
-
-const Select = styled.select`
-    display: block;
-    font-weight: bold;
-`
-
-const Input = styled.input`
-	border: solid 1px #000;
-`;
-
-const Label = styled.label`
-    display: block;
-    font-weight: bold;
-`;
-
-const Title = styled.h3`
-    margin-bottom: 5px;
-`;
-
-const Toolbar = styled.div`
-    margin: 5px 0;
-`;
-
-class CreateTransactionToolbar extends React.Component<ICreateTransactionToolbar, any> {
+export default class CreateTransactionToolbar extends React.Component<ICreateTransactionToolbar, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,7 +15,6 @@ class CreateTransactionToolbar extends React.Component<ICreateTransactionToolbar
             type: 0,
         }
     }
-
     public createTransaction = () => {
         const { lineId } = this.props;
         const { amount, type } = this.state;
@@ -53,7 +24,7 @@ class CreateTransactionToolbar extends React.Component<ICreateTransactionToolbar
                     this.props.transactionCreated(response.data)
                     this.setState({
                         amount: '',
-                        type: ''
+                        type: 0
                     });
                 }
             })
@@ -83,4 +54,35 @@ class CreateTransactionToolbar extends React.Component<ICreateTransactionToolbar
     }
 }
 
-export default CreateTransactionToolbar;
+const Button = styled.button`
+    border: solid 1px #000;
+    display: block;
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px;
+    background: black;
+    color: white;
+`;
+
+const Select = styled.select`
+    display: block;
+    font-weight: bold;
+`
+
+const Input = styled.input`
+	border: solid 1px #000;
+`;
+
+const Label = styled.label`
+    display: block;
+    font-weight: bold;
+`;
+
+const Title = styled.h3`
+    margin-bottom: 5px;
+`;
+
+const Toolbar = styled.div`
+    margin: 5px 0;
+`;

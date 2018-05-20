@@ -15,7 +15,6 @@ class App extends React.Component<any, any> {
 			lines: []
 		}
 	}
-
     public componentDidMount() {
         axios.get(`http://localhost:5000/api/lines`)
             .then(response => {
@@ -28,17 +27,20 @@ class App extends React.Component<any, any> {
             })
             .catch(error => new Error(error));
 	}
-
 	public lineCreated = (line) => {
 		this.state.lines.push(line);
 		this.setState({lines: this.state.lines});
 	}
-
+	public lineDeleted = (lineId) => {
+		this.setState({
+			lines: this.state.lines.filter(l => l.id !== lineId)
+		});
+	}
 	public render(): JSX.Element {
 		return (
 			<ApplicationContainer>
 				<h1>Lines of credit:</h1>
-				{this.state.lines.map((l, i) => <Line key={i} line={l} />)}
+				{this.state.lines.map((l, i) => <Line key={i} line={l} lineDeleted={this.lineDeleted} />)}
 				<CreateLineToolbar lineCreated={this.lineCreated} />
 			</ApplicationContainer>
 		);
