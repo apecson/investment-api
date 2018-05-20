@@ -18,4 +18,4 @@ EXPOSE 80
 ENV NAME credit-api
 
 # Run app.py when the container launches
-CMD ["python", "src/server/api.py"]
+CMD ["python", "src/server/app.py"]

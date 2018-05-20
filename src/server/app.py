@@ -5,8 +5,8 @@ from flask_restful import fields, marshal_with, reqparse, abort, Api, Resource
 import json
 import uuid
 import os
-# from redis import Redis, RedisError
-import redis
+from redis import Redis, RedisError
+# import redis
 import time
 import socket
 
@@ -27,8 +27,8 @@ parser.add_argument('type')
 parser.add_argument('lineId')
 
 # Connect to Redis
-redis = redis.StrictRedis(host='0.0.0.0', port=6379, db=0)
-# redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2)
+# redis = redis.StrictRedis(host='0.0.0.0', port=6379, db=0)
+redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2)
 
 redis.set('lines', json.dumps([
     {
@@ -196,8 +196,8 @@ class Transactions(Resource):
 api.add_resource(Lines, '/api/lines', '/api/lines/<string:line_id>')
 api.add_resource(Transactions, '/api/transactions/', '/api/transactions/<string:line_id>')
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
 # if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=80)
+#    app.run(debug=True)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80)

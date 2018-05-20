@@ -16,7 +16,7 @@ class App extends React.Component<any, any> {
 		}
 	}
     public componentDidMount() {
-        axios.get(`http://localhost:5000/api/lines`)
+        axios.get(`http://localhost:4000/api/lines`)
             .then(response => {
                 if (response && response.statusText === 'OK') {
                     this.setState({

@@ -18,7 +18,7 @@ export default class CreateTransactionToolbar extends React.Component<ICreateTra
     public createTransaction = () => {
         const { lineId } = this.props;
         const { amount, type } = this.state;
-        axios.post(`http://localhost:5000/api/transactions/`, { amount, lineId, type})
+        axios.post(`http://localhost:4000/api/transactions/`, { amount, lineId, type})
             .then(response => {
                 if (response && response.statusText === 'CREATED') {
                     this.props.transactionCreated(response.data)

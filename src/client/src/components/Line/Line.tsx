@@ -19,7 +19,7 @@ export default class Line extends React.Component<ILineProps, any> {
 	}
 	public loadTransactions = () => {
 		const { id } = this.props.line;
-        axios.get(`http://localhost:5000/api/transactions/${id}`)
+        axios.get(`http://localhost:4000/api/transactions/${id}`)
             .then(response => {
                 if (response && response.statusText === 'OK') {
                     this.setState({
@@ -46,7 +46,7 @@ export default class Line extends React.Component<ILineProps, any> {
 	}
 	public deleteLine = () => {
 		const { id } = this.props.line;
-        axios.delete(`http://localhost:5000/api/lines/${id}`)
+        axios.delete(`http://localhost:4000/api/lines/${id}`)
             .then(response => {
                 if (response && response.statusText === 'OK') {
 					this.props.lineDeleted(id);
