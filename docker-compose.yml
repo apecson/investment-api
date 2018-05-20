@@ -1,16 +1,22 @@
-redis:
-  image: redis
+version: '2'
+services:
+  redis:
+    image: redis
 
-nginx:
-  image: nginx
-  ports:
-    - "4001:90"
+  nginx:
+    build:
+      context: .
+      dockerfile: DockerFileWeb
+    ports:
+      - "8080:90"
 
-driver:
-  build: .
-  ports:
-    - "4000:80"
-  links:
-    - redis
-    - nginx
+  driver:
+    build:
+      context: .
+      dockerfile: DockerFileApi
+    ports:
+      - "4000:80"
+    links:
+      - redis
+      - nginx
 
